@@ -23,6 +23,8 @@ Adafruit_SSD1306 display(4);
 
 void drawCourt();
 
+
+
 void setup() {
     Serial.begin(9600);
     
@@ -123,10 +125,10 @@ void loop() {
         // CPU paddle
         display.drawFastVLine(CPU_X, cpu_y, PADDLE_HEIGHT, BLACK);
         const uint8_t half_paddle = PADDLE_HEIGHT >> 1;
-        if(cpu_y + half_paddle -5 > ball_y- 6) {
+        if(cpu_y + half_paddle> ball_y - 6) {
             cpu_y -= 1;
         }
-        if(cpu_y + half_paddle -5 < ball_y+6) {
+        if(cpu_y + half_paddle < ball_y  - 4){
             cpu_y += 1;
         }
         if(cpu_y < 1) cpu_y = 1;
@@ -201,7 +203,7 @@ void askQuestion(void){
   } else if(i == 2) {
     question = "What is an ammendment";
     PossibleAnswer = rangedRand(1,2) == 1 ? "A thing you ammend" : "The Consitution";
-    answer = "A Change or addition to the consitution";
+    answer = "Change to consitution";
   } else if(i == 3) {
     question = "What are the first ten ammendments called?";
     PossibleAnswer = rangedRand(1,2) == 1 ? "The Bill of Laws" : "The Consitution";
@@ -216,11 +218,11 @@ void askQuestion(void){
     answer = "4";
   } else if(i == 6) {
     question = "What are the two parts of the U.S Congress?";
-    PossibleAnswer = rangedRand(1,2) == 1 ? "The Presidentary and The Supreme Court" : "The Democrats and the Republicans";
+    PossibleAnswer = rangedRand(1,2) == 1 ? "Supreme Court / Word Court" : "The Democrats and the Republicans";
     answer = "A Change or addition to the consitution";
   } else if(i == 7) {
     question = "Who is charge in the executive branch?";
-    PossibleAnswer = rangedRand(1,2) == 1 ? "The Leader of the House" : "The Senator";
+    PossibleAnswer = rangedRand(1,2) == 1 ? "Leader of the House" : "The Senator";
     answer = "The President";
   }
 
@@ -233,7 +235,6 @@ void askQuestion(void){
    QB = answer;
    display.println(PossibleAnswer);
   } else if(position == 2) {
-   Serial.println(F("2"));
    display.println(answer);
    QA = PossibleAnswer;
    QB = answer;
