@@ -1,5 +1,4 @@
 #include <Adafruit_SSD1306.h>
-
 uint8_t ball_x = 64, ball_y = 16;
 uint8_t ball_dir_x = 1, ball_dir_y = 1;
 unsigned int ball_update;
@@ -23,28 +22,40 @@ Adafruit_SSD1306 display(4);
 
 void drawCourt();
 
-
-
 void setup() {
     Serial.begin(9600);
     
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
     
-    display.display(); // Optional
-    unsigned long start = millis();
+//    display.display(); // Optional
+//    unsigned long start = millis();
+//    while(millis() - start < 2000);
+//
+    display.clearDisplay();
+
+    unsigned long start1 = millis();
+    display.setTextSize(1.5);
+    display.setTextColor(WHITE);
+    display.setCursor(0,0);
+    display.println(F("Jonants Enterprises  introduces Pongerian"));
+    display.display();
+    while(millis() - start1 < 2000);
+    display.clearDisplay();
 
     pinMode(3, INPUT);
     pinMode(4, INPUT);
 
-    display.clearDisplay();
+    
 
     drawCourt();
-    while(millis() - start < 2000);
+    
 
     display.display();
 
     ball_update = millis();
     paddle_update = ball_update;
+
+
 }
 
 void loop() {
